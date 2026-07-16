@@ -6,4 +6,9 @@ export const env = {
     username: process.env.NAFATH_USERNAME ?? '',
     password: process.env.NAFATH_PASSWORD ?? '',
   },
+  admin: {
+    apiURL: process.env.ADMIN_API_URL ?? 'http://localhost:8000',
+    username: process.env.ADMIN_USERNAME ?? '',
+    password: process.env.ADMIN_PASSWORD ?? '',
+  },
 };

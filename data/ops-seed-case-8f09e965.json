@@ -1,0 +1,80 @@
+{
+  "_name": "seed-1774755802",
+  "deceased": {
+    "identityNumber": "1774755802",
+    "identityType": 1,
+    "firstName": "علي",
+    "middleName": "أحمد",
+    "lastName": "عمر",
+    "familyName": "الشهري",
+    "fullName": "علي أحمد عمر الشهري",
+    "gender": 1,
+    "nationalityId": 1,
+    "birthDate": "1947-10-25T00:00:00",
+    "birthDateHijri": "1366/12/11",
+    "deathDate": "2025-10-05T00:00:00",
+    "deathDateHijri": "1447/04/13",
+    "deathDocumentIssueDate": null,
+    "deathDocumentIssueDateHijri": ""
+  },
+  "beneficiary": {
+    "identityNumber": "1296868010",
+    "identityType": 1,
+    "firstName": "إبراهيم",
+    "middleName": null,
+    "lastName": null,
+    "familyName": "الشهري",
+    "fullName": "إبراهيم الشهري",
+    "gender": 1,
+    "nationalityId": 1,
+    "birthDate": "1990-01-01T00:00:00",
+    "birthDateHijri": "1410/06/04",
+    "phoneNumber": "0534394820",
+    "relationshipTypeId": 7,
+    "relationshipType": "ابن",
+    "beneficiaryTypeId": 1,
+    "agencyTypeId": null
+  },
+  "heirs": [
+    {
+      "id": "79ab504f-901d-4f74-a582-d7c9b81df5ef",
+      "identityNumber": "1359112217",
+      "identityType": 1,
+      "firstName": "محمد",
+      "middleName": null,
+      "lastName": null,
+      "familyName": "الشهري",
+      "fullName": "محمد الشهري",
+      "gender": 1,
+      "nationalityId": 1,
+      "birthDate": "2002-12-28T00:00:00",
+      "birthDateHijri": "1423/10/24",
+      "phoneNumber": "0500735813",
+      "relationshipTypeId": 7,
+      "relationshipType": "ابن",
+      "isMinor": false,
+      "isAdult": true,
+      "isDead": false,
+      "isWifePregnant": null
+    }
+  ],
+  "request": {
+    "id": 505,
+    "requestNumber": "SEED-8f09e965"
+  },
+  "estateAssets": {
+    "bankAccounts": [
+      {
+        "iban": "SA5961941316951317981690",
+        "accountNumber": "ACC45316019",
+        "balance": "200000.00"
+      }
+    ],
+    "investments": [
+      {
+        "accountNumber": "ACC89761629",
+        "balance": "10000.00"
+      }
+    ]
+  }
+}

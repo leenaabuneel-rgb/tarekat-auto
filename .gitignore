@@ -7,6 +7,4 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 
-# Secrets
-.env
-.env.*
+data/*

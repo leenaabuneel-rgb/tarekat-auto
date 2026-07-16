@@ -1,3 +1,8 @@
+import dotenv from 'dotenv';
+import path from 'path';
+
+dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
+
 export const env = {
   baseURL: process.env.BASE_URL ?? 'http://localhost:3000',
   apiURL: process.env.API_URL ?? 'http://localhost:3000/api',

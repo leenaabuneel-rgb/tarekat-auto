@@ -1,14 +1,17 @@
 import { BasePage } from './base.page';
+import { LoginLocators } from '../locators/login.locators';
 
 export class LoginPage extends BasePage {
+  private readonly locators = new LoginLocators(this.page);
+
   async goto() {
     await this.page.goto('/login');
   }
 
   async loginWithNafath(username: string, password: string) {
-    await this.page.getByText('الدخول عن طريق نفاذ').click();
-    await this.page.getByLabel('اسم المستخدم').fill(username);
-    await this.page.getByLabel('كلمة المرور').fill(password);
-    await this.page.getByRole('button', { name: /دخول|تسجيل الدخول/ }).click();
+    await this.locators.nafathLoginLink().click();
+    await this.locators.usernameInput().fill(username);
+    await this.locators.passwordInput().fill(password);
+    await this.locators.submitButton().click();
   }
 }

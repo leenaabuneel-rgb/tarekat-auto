@@ -1,6 +1,7 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './base.page';
 import { env } from '../config/env';
+import { SeederLocators } from '../locators/seeder.locators';
 
 export type SeedCaseJson = {
   _name: string;
@@ -19,25 +20,27 @@ export type SeedResult = {
 };
 
 export class SeederPage extends BasePage {
+  private readonly locators = new SeederLocators(this.page);
+
   async login(username: string = env.admin.username, password: string = env.admin.password) {
     await this.page.goto(`${env.admin.apiURL}/admin/inheritance_seeder/inheritanceseeder/seed/`);
-    await this.page.getByLabel('Username:').fill(username);
-    await this.page.getByLabel('Password:').fill(password);
-    await this.page.getByRole('button', { name: 'Log in' }).click();
+    await this.locators.usernameInput().fill(username);
+    await this.locators.passwordInput().fill(password);
+    await this.locators.loginButton().click();
     await this.page.waitForLoadState('networkidle').catch(() => {});
   }
 
   async generateRandomData() {
-    await this.page.getByRole('button', { name: 'Generate Random Data' }).click();
+    await this.locators.generateRandomDataButton().click();
     // The fill is async client-side JS; give it time to populate before submitting.
     await this.page.waitForTimeout(1500);
   }
 
   async seedCase(): Promise<SeedResult> {
-    await this.page.locator('input[type=submit][value="Seed Case"]').click();
+    await this.locators.seedCaseSubmit().click();
     await this.page.waitForLoadState('networkidle').catch(() => {});
 
-    const bodyText = await this.page.locator('body').innerText();
+    const bodyText = await this.locators.body().innerText();
     const successLine = bodyText.split('\n').find((line) => line.includes('seeded successfully'));
     if (!successLine) {
       throw new Error('Seed Case did not report success');
@@ -66,8 +69,8 @@ export class SeederPage extends BasePage {
   }
 
   async loginAsBeneficiary(result: SeedResult): Promise<Page> {
-    const row = this.page.locator('tr', { hasText: result.json.beneficiary.identityNumber });
-    const loginLink = row.first().locator('a, button').filter({ hasText: /Login as User/i });
+    const row = this.locators.beneficiaryRow(result.json.beneficiary.identityNumber);
+    const loginLink = this.locators.loginAsUserLink(row);
 
     const [popup] = await Promise.all([
       this.page.context().waitForEvent('page'),

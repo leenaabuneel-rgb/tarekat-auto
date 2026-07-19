@@ -1,35 +1,24 @@
 import { test, expect } from '../../fixtures/base.fixture';
 import { env } from '../../config/env';
-import { RequestsPage } from '../../pages/requests.page';
 import { CashDivisionsPage } from '../../pages/cash-divisions.page';
-import { TawtheeqClient } from '../../api/clients/tawtheeq.client';
+import { DataPreparation } from '../../steps/data-preparation';
+import { OpenDivisionsList } from '../../steps/open-divisions-list';
 
 test.describe('Inheritance seeder', () => {
 
   test('seeds a case, navigates to الطلبات, and opens case details', async ({ seederPage, request }) => {
     test.skip(!env.admin.username || !env.admin.password, 'ADMIN_USERNAME/ADMIN_PASSWORD not set');
 
-    await seederPage.login();
-    await seederPage.generateRandomData();
-    const result = await seederPage.seedCase();
+    const dataPreparation = new DataPreparation(seederPage, request);
+    const { result, beneficiaryTab } = await test.step(
+      'Pre-requisite: seed case data, mock Tawtheeq, and log in as beneficiary',
+      () => dataPreparation.seedCase(),
+    );
 
-    const tawtheeqClient = new TawtheeqClient(request, env.tawtheeq.baseURL);
-    const tawtheeqResponse = await tawtheeqClient.seedCase(result.json);
-    expect(tawtheeqResponse.ok()).toBeTruthy();
-
-    const beneficiaryTab = await seederPage.loginAsBeneficiary(result);
-    const requestsPage = new RequestsPage(beneficiaryTab);
-
-    await requestsPage.open();
-    await expect(beneficiaryTab).toHaveURL(/\/my-orders/);
-
-    await expect(requestsPage.requestCard('قسمة التركة')).toContainText('لم تبدأ بعد');
-
-    await requestsPage.openCaseDetails();
-    await expect(beneficiaryTab.getByText('تفاصيل الطلب')).toBeVisible();
-    await expect(beneficiaryTab.getByText(result.json.request.requestNumber)).toBeVisible();
-
-    await requestsPage.openDivisionsListingPage();
+    const openDivisionsList = new OpenDivisionsList(beneficiaryTab, result);
+    const requestsPage = await test.step('openDivisionsList', () =>
+      openDivisionsList.run(),
+    );
 
     const cashDivisionsPage = new CashDivisionsPage(beneficiaryTab);
     await cashDivisionsPage.startCashDivision();

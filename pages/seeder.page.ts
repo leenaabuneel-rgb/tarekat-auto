@@ -23,7 +23,7 @@ export class SeederPage extends BasePage {
   private readonly locators = new SeederLocators(this.page);
 
   async login(username: string = env.admin.username, password: string = env.admin.password) {
-    await this.page.goto(`${env.admin.apiURL}/admin/inheritance_seeder/inheritanceseeder/seed/`);
+    await this.page.goto(`${env.admin.apiURL}${env.inheritanceSeeder.apiURL}`);
     await this.locators.usernameInput().fill(username);
     await this.locators.passwordInput().fill(password);
     await this.locators.loginButton().click();

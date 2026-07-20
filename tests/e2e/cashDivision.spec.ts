@@ -2,7 +2,7 @@ import { test, expect } from '../../fixtures/base.fixture';
 import { env } from '../../config/env';
 import { CashDivisionsPage } from '../../pages/cash-divisions.page';
 import { DataPreparation } from '../../steps/data-preparation';
-import { OpenDivisionsList } from '../../steps/open-divisions-list';
+import { DivisionsList } from '../../steps/divisions-list';
 
 test.describe('Inheritance seeder', () => {
 
@@ -15,9 +15,9 @@ test.describe('Inheritance seeder', () => {
       () => dataPreparation.seedCase(),
     );
 
-    const openDivisionsList = new OpenDivisionsList(beneficiaryTab, result);
+    const divisionsList = new DivisionsList(beneficiaryTab, result);
     const requestsPage = await test.step('openDivisionsList', () =>
-      openDivisionsList.run(),
+      divisionsList.run(),
     );
 
     const cashDivisionsPage = new CashDivisionsPage(beneficiaryTab);

@@ -16,6 +16,9 @@ export const env = {
     username: process.env.ADMIN_USERNAME ?? '',
     password: process.env.ADMIN_PASSWORD ?? '',
   },
+  inheritanceSeeder: {
+    apiURL: process.env.InheritanceSeeder_API_URL ?? '/inheritance_seeder/inheritanceseeder/seed/',
+  },
   tawtheeq: {
     baseURL: process.env.TAWTHEEQ_BASE_URL ?? 'https://preprod-mocks.azm-dev.com',
     accessToken: process.env.TAWTHEEQ_ACCESS_TOKEN ?? '',

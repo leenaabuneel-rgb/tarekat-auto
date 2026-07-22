@@ -8,16 +8,16 @@ export class CashDivisionsLocators {
     return this.page.getByRole('button', { name: 'الأموال النقدية' });
   }
 
-  startDivisionButton() {
-    return this.cashCard().getByRole('button', { name: 'بدء القسمة' });
+  showAssetsButton() {
+    return this.cashCard().getByRole('button', { name: 'عرض ألأصول' });
   }
 
   agreementCheckbox() {
     return this.page.getByRole('checkbox');
   }
 
-  confirmButton() {
-    return this.page.getByRole('button', { name: 'موافق', exact: true });
+  startDivisionButton() {
+    return this.page.getByRole('button', { name: 'بدء القسمة', exact: true });
   }
 
   closePopupIcon() {

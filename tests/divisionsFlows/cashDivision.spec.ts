@@ -21,8 +21,9 @@ test.describe('Inheritance seeder', () => {
     );
 
     const cashDivisionsPage = new CashDivisionsPage(beneficiaryTab);
-    await cashDivisionsPage.startCashDivision();
+    await cashDivisionsPage.showAssets();
     await cashDivisionsPage.acceptDivisionAgreement();
+    await cashDivisionsPage.startDivision();
     await cashDivisionsPage.closeDivisionSuccessPopup();
 
     await requestsPage.open();
@@ -30,7 +31,7 @@ test.describe('Inheritance seeder', () => {
     await expect(requestsPage.requestCard('قسمة التركة')).toContainText('قيد التنفيذ');
 
     await requestsPage.openCaseDetails();
-    await expect(requestsPage.distributionStatus()).toContainText('لم تبدأ بعد');
+    await expect(requestsPage.distributionStatus()).toContainText('بانتظار بدء القسمة');
 
     await requestsPage.openDivisionsListingPage();
     await expect(cashDivisionsPage.requestStatus()).toContainText('بانتظار موافقة الورثة');

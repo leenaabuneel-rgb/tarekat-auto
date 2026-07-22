@@ -4,16 +4,20 @@ import { CashDivisionsLocators } from '../locators/cash-divisions.locators';
 export class CashDivisionsPage extends BasePage {
   private readonly locators = new CashDivisionsLocators(this.page);
 
-  /** In the "الأموال النقدية" card, starts the division ("بدء القسمة"). */
-  async startCashDivision() {
-    await this.locators.startDivisionButton().click();
+  /** In the "الأموال النقدية" card, views the assets ("عرض الأصول"). */
+  async showAssets() {
+    await this.locators.showAssetsButton().click();
     await this.page.waitForLoadState('networkidle').catch(() => {});
   }
 
-  /** Checks the إقرار وتعهد agreement checkbox and confirms with "موافق". */
+  /** Checks the إقرار وتعهد agreement checkbox. */
   async acceptDivisionAgreement() {
     await this.locators.agreementCheckbox().check();
-    await this.locators.confirmButton().click();
+  }
+
+  /** Confirms with "موافق" to start the division. */
+  async startDivision() {
+    await this.locators.startDivisionButton().click();
     await this.page.waitForLoadState('networkidle').catch(() => {});
   }
 

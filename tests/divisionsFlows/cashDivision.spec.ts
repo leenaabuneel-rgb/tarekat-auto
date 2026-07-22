@@ -6,7 +6,7 @@ import { DivisionsList } from '../../steps/divisions-list';
 
 test.describe('Inheritance seeder', () => {
 
-  test('seeds a case, navigates to الطلبات, and opens case details', async ({ seederPage, request }) => {
+  test('seeds a case, navigates to الطلبات, and opens case details @smoke', async ({ seederPage, request }) => {
     test.skip(!env.admin.username || !env.admin.password, 'ADMIN_USERNAME/ADMIN_PASSWORD not set');
 
     const dataPreparation = new DataPreparation(seederPage, request);
